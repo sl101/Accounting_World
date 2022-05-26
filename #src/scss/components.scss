@@ -1,0 +1,106 @@
+//<Hover> =====================================
+.hover {
+	outline: transparent;
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	transition: all $hoverTime ease-in;
+
+	@include lg-min {
+		&:focus {
+			// border-bottom: 1px solid $black-450;
+		}
+
+		&:hover {
+			border-bottom: 1px solid $brandColor;
+		}
+
+		&:active {
+			// border-bottom: 1px solid $black-450;
+		}
+	}
+}
+// <ОБЩИЕ БЛОКИ> ==============================
+.title {
+	font-size: 24px;
+
+	@include xl {
+	}
+
+	@include lg {
+		text-align: center;
+	}
+
+	@include md {
+		font-size: 20px;
+	}
+
+	@include sm {
+		font-size: 18px;
+	}
+}
+
+// ==========================================
+.btn {
+	font-family: Roboto;
+	border-radius: 10px;
+	border-width: 1px;
+	border-style: solid;
+	font-size: 24px;
+	padding: 9px 20px;
+	outline: none;
+	color: inherit;
+	letter-spacing: 0.6px;
+	background-color: transparent;
+	transition: all $hoverTime ease-in;
+
+	@include lg-min {
+		&:focus {
+			border-color: $black-450;
+		}
+
+		&:hover {
+			color: $white-0e;
+			border-color: $brandColor;
+			background-color: $brandColor;
+		}
+
+		&:active {
+			transform: translate(2px, 2px);
+		}
+	}
+
+	&--white {
+		border-color: $white-0e;
+	}
+
+	&--black {
+		color: $black-450;
+		border-color: $black-450;
+	}
+}
+
+// ===================================
+.social-media {
+	flex: 0 0 170px;
+	display: flex;
+	justify-content: space-between;
+
+	// .social-media__link
+	&__link {
+		outline: none;
+
+		@include lg-min {
+			&:focus .social-media__icon {
+				fill: $black-450;
+			}
+
+			&:hover .social-media__icon {
+				fill: $brandColor;
+			}
+
+			&:active .social-media__icon {
+				transform: translate(2px, 2px);
+			}
+		}
+	}
+}
