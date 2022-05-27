@@ -15,7 +15,7 @@
 	// .header__content
 	&__content {
 		display: grid;
-		grid-template-columns: 300px 1fr 154px;
+		grid-template-columns: 290px auto 154px;
 		row-gap: 20px;
 		grid-template-areas:
 			"phones search lang"
@@ -46,7 +46,6 @@
 	&__logo {
 		grid-area: logo;
 		position: relative;
-		justify-self: center;
 		max-width: 230px;
 		min-height: 77px;
 		height: 100%;
@@ -109,11 +108,12 @@
 		font-size: 13px;
 		color: $brandColor;
 		padding-left: 17px;
+		padding-bottom: 2px;
 
 		&::before {
 			content: "";
 			position: absolute;
-			bottom: 0;
+			bottom: 4px;
 			left: 0;
 			width: 12px;
 			height: 12px;
@@ -284,12 +284,14 @@
 
 //.menu
 .menu {
-	display: block;
-	max-width: 690px;
 	grid-area: nav;
+	display: block;
+	width: 100%;
+	flex: 0 0 100%;
+	margin-left: -20px;
 
 	@include xl {
-		width: 100%;
+		margin: 0;
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
@@ -300,9 +302,6 @@
 		position: relative;
 		z-index: 4;
 		width: 100%;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
 		font-weight: 700;
 		font-size: 14px;
 		text-transform: uppercase;
@@ -319,7 +318,6 @@
 			overflow: auto;
 			background-color: $black-450;
 			box-shadow: 0 0 15px $black-450;
-
 			transform: translate(-110%, 0);
 			padding: 100px 20px 30px;
 		}
@@ -336,34 +334,57 @@
 		align-items: center;
 
 		@include xl {
-			width: 100%;
 			flex-direction: column;
 			align-items: flex-start;
 			padding: 50px;
 			font-size: 28px;
 		}
 
+		@include lg {
+			font-size: 22px;
+		}
+
+		@include md {
+			font-size: 17px;
+		}
+
 		@include sm {
-			margin: 40px 0 60px 0;
+			font-size: 13px;
+			padding: 50px 50px 50px 10px;
 		}
 	}
 
 	// .menu__item
 	&__item {
-		flex: 0 0 auto;
+		position: relative;
 
 		&:not(:last-child) {
-			margin: 0 25px 0 0;
+			margin: 0 15px 0 0;
 		}
 
-		@include lg {
+		@include xl {
 			&:not(:last-child) {
 				margin: 0 0 30px 0;
 			}
 		}
+
+		@include sm {
+			&:not(:last-child) {
+				margin: 0 0 15px 0;
+			}
+		}
+
+		&:hover .sub-menu__list {
+			display: inline-block;
+		}
 	}
 
 	&__link {
+		padding-bottom: 2px;
+	}
+
+	& a.parent {
+		margin: 0px 25px 0px 0px;
 	}
 }
 
@@ -371,24 +392,78 @@
 	// .sub-menu__list
 	&__list {
 		display: none;
+		position: absolute;
+		z-index: 2;
+		top: 10px;
+		left: 0;
+		min-width: 295px;
+		padding: 20px 0 0 0;
+		transition: all $hoverTime ease-in;
+
+		@include xl {
+			top: -100%;
+			left: 110%;
+		}
 	}
 
 	// .sub-menu__item
 	&__item {
+		padding: 10px 35px 10px 20px;
+		background-color: $black-30d;
+		border-bottom: 1px solid $black-300;
+		transition: background-color $hoverTime ease-in;
+
+		&:hover {
+			background-color: $brandColor;
+		}
+
+		&:hover .sub-sub-menu__list {
+			display: block;
+		}
 	}
 
 	// .sub-menu__link
 	&__link {
+		display: inline-block;
+		font-weight: 300;
+		font-size: 11px;
 	}
 }
 
 .sub-sub-menu {
 	// .sub-sub-menu__list
 	&__list {
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 100%;
+		min-width: 455px;
+		padding: 20px 0 0 2px;
+
+		@include xl {
+			position: relative;
+			left: 0;
+			top: 100%;
+		}
+	}
+
+	// .sub-sub-menu__item
+	&__item {
+		padding: 10px 35px 10px 20px;
+		background-color: $black-30d;
+		border-bottom: 1px solid $black-300;
+		transition: background-color $hoverTime ease-in;
+
+		&:hover {
+			background-color: $brandColor;
+		}
 	}
 
 	// .sub-sub-menu__link
 	&__link {
+		display: inline-block;
+		font-weight: 300;
+		font-size: 11px;
 	}
 }
 
@@ -400,11 +475,11 @@
 	align-items: center;
 
 	:not(:last-child) {
-		margin-right: 25px;
+		margin-right: 18px;
 	}
 
 	@include xl {
-		margin-left: 20px;
+		margin-left: 15px;
 	}
 
 	@include sm {
@@ -452,4 +527,58 @@
 			top: 1px;
 		}
 	}
+}
+
+.arrow {
+	display: none;
+	position: absolute;
+	right: 0;
+	top: 5px;
+	width: 0;
+	height: 0;
+	border-top: 10px solid #fff;
+	border-right: 10px solid transparent;
+	border-left: 10px solid transparent;
+
+	@include xl {
+		top: 12px;
+		right: -7px;
+	}
+}
+
+.arrow.active {
+	transform: rotate(-180deg);
+}
+
+.sub-menu__arrow.arrow {
+	top: 50%;
+	right: 10px;
+	border-bottom: none;
+	border-left: 10px solid transparent;
+	border-top: 10px solid $brandColor;
+	border-right: 10px solid transparent;
+}
+
+.sub-menu__arrow.arrow.active {
+	border-left-color: $black-30d;
+}
+
+body.mouse .menu__list > :hover .sub-menu__list {
+	display: block;
+}
+
+body.mouse .sub-menu__list > :hover .sub-sub-menu__list {
+	display: block;
+}
+
+body.touch .sub-menu__list.open {
+	display: block;
+}
+
+body.touch .sub-sub-menu__list.open {
+	display: block;
+}
+
+body.touch .arrow {
+	display: block;
 }

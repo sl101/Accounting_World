@@ -5,3 +5,4 @@ flsFunctions.isWebp();
 
 import * as burger from 					"./files/burger.js";
 import * as scrolls from 					"./files/scrolls.js";
+import * as submenu from 					"./files/submenu.js";
