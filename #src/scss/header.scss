@@ -1,65 +1,294 @@
 .header {
-	position: fixed;
-	z-index: 50;
-	top: 0;
-	width: 100%;
-	min-height: 75px;
+	position: relative;
+	padding: 29px 0;
 
 	&::before {
 		content: "";
 		position: absolute;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
 		background-color: $black-480;
-
-		@include lg {
-			z-index: 2;
-		}
-	}
-
-	@include sm {
-		min-height: 100px;
 	}
 
 	// .header__content
 	&__content {
-		display: flex;
+		display: grid;
+		grid-template-columns: 300px 1fr 154px;
+		row-gap: 20px;
+		grid-template-areas:
+			"phones search lang"
+			"logo nav social";
 		align-items: center;
-		justify-content: space-between;
-		min-height: 75px;
+
+		@include xl {
+			grid-template-columns: auto;
+			grid-template-areas:
+				"logo  logo nav"
+				"social phones phones"
+				"search search lang";
+			justify-content: space-between;
+			align-items: center;
+			row-gap: 30px;
+		}
 
 		@include sm {
-			min-height: 100px;
-			align-items: flex-end;
-			padding: 0 0 20px 0;
+			grid-template-areas:
+				"logo nav"
+				"phones phones"
+				"social lang"
+				"search search";
 		}
 	}
 
 	// .header__logo
 	&__logo {
-		font-family: Montserrat, sans-serif;
-		font-weight: 300;
-		font-size: 24px;
+		grid-area: logo;
 		position: relative;
-		z-index: 5;
-		display: inline-block;
-		text-transform: uppercase;
+		justify-self: center;
+		max-width: 230px;
+		min-height: 77px;
+		height: 100%;
+		width: 100%;
+		font-weight: 300;
+		font-size: 14px;
+		padding-bottom: 8px;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		outline: transparent;
+		border: 1px solid transparent;
+		transition: border-color $hoverTime ease-in;
+
+		@include lg-min {
+			&:hover {
+				border-bottom-color: $brandColor;
+			}
+
+			&:focus {
+				border-bottom-color: $black-800;
+			}
+		}
+
+		&:active {
+			top: 1px;
+		}
+
+		@include xl {
+			z-index: 5;
+			justify-self: flex-start;
+			align-items: center;
+		}
 
 		@include sm {
-			font-size: 20px;
+			max-width: 180px;
 		}
 	}
 }
 
-//menu
-.menu {
-	margin: 0 20px 0 0;
+.phones {
+	grid-area: phones;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
 
-	@include lg {
+	@include xl {
+		justify-self: flex-end;
+		flex-direction: column;
+	}
+
+	&__item {
+		min-height: 22px;
+	}
+
+	// .phones__link
+	&__link {
+		position: relative;
+		font-size: 13px;
+		color: $brandColor;
+		padding-left: 17px;
+
+		&::before {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 12px;
+			height: 12px;
+			border: 1px solid $black-800;
+			background-color: $black-800;
+			border-radius: 3px;
+			background-image: url("../img/icons_png/phone.png");
+			@include bg-cover;
+		}
+
+		@include lg-min {
+			&:hover {
+				color: $black-600;
+			}
+		}
+	}
+}
+
+.search {
+	position: relative;
+	grid-area: search;
+	display: flex;
+	width: 100%;
+	height: 37px;
+	margin: 0 auto;
+	justify-content: center;
+	align-self: center;
+	max-width: 460px;
+
+	@include xl {
 		margin: 0;
 	}
 
-	@include md {
+	// .search__label
+	&__label {
+		width: 100%;
+	}
+
+	// .search__input
+	&__input {
+		display: block;
+		max-width: 414px;
+		width: 100%;
+		height: 100%;
+		padding: 4px 6px;
+		background-color: $white-0f;
+		outline: none;
+		border: 1px solid transparent;
+		transition: border-color $hoverTime ease-in;
+
+		&::placeholder {
+			transition: color $hoverTime ease-in;
+		}
+
+		@include lg-min {
+			&:hover {
+				&::placeholder {
+					color: $black-450;
+				}
+			}
+
+			&:focus {
+				border-color: orangered;
+			}
+		}
+	}
+
+	// .search__button
+	&__button {
+		position: relative;
+		top: 0;
+		display: block;
+		max-width: 45px;
+		height: 100%;
+		border-radius: 3px;
+		padding: 0 12px;
+		font-weight: 700;
+		color: $white-0f;
+		outline: none;
+		box-shadow: inset 0 1px 2px $black-800;
+		background-color: $brandColor;
+		transition: background-color $hoverTime ease-in, color $hoverTime ease-in;
+
+		@include lg-min {
+			&:hover {
+				background-color: $black-600;
+			}
+
+			&:focus {
+				color: $black-450;
+			}
+		}
+
+		&:active {
+			top: 1px;
+		}
+	}
+}
+
+.lang {
+	grid-area: lang;
+	position: relative;
+	max-width: 60px;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	justify-self: end;
+
+	@include xl {
+		max-width: 100%;
+		justify-self: center;
+		justify-content: flex-end;
+	}
+
+	// .lang__item
+	&__item {
+		margin-right: 10px;
+
+		@include xl {
+			display: none;
+
+			&.active {
+				display: flex;
+				align-self: center;
+			}
+		}
+	}
+
+	// .lang__link
+	&__link {
+		position: relative;
+		top: 0;
+		display: block;
+		max-width: 18px;
+		height: 100%;
+		outline: transparent;
+		padding: 2px;
+		border: 1px solid transparent;
+		transition: border-color $hoverTime ease-in;
+
+		@include lg-min {
+			&:hover {
+				border-bottom-color: $brandColor;
+			}
+
+			&:focus {
+				border-bottom-color: $black-800;
+			}
+		}
+
+		&:active {
+			top: 1px;
+		}
+
+		@include xl {
+			margin: 0 auto;
+		}
+	}
+
+	// .lang__img
+	&__img {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+//.menu
+.menu {
+	display: block;
+	max-width: 690px;
+	grid-area: nav;
+
+	@include xl {
 		width: 100%;
 		display: flex;
 		justify-content: flex-end;
@@ -68,30 +297,31 @@
 
 	// .menu__body
 	&__body {
-		// font-family: Roboto, sans-serif;
 		position: relative;
-		z-index: 1;
+		z-index: 4;
 		width: 100%;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		transition: all $doubleHoverTime ease-out;
+		font-weight: 700;
+		font-size: 14px;
+		text-transform: uppercase;
+		color: $white-0f;
+		transition: all $hoverTime ease-out;
 
-		@include lg {
+		@include xl {
 			position: fixed;
 			top: 0;
 			left: 0;
-			display: block;
-			width: 50%;
+			align-items: flex-start;
+			width: 100%;
 			height: 100%;
 			overflow: auto;
-			transform: translate(-100%, 0);
-			// background-color: $background-example;
-			padding: 100px 20px 30px;
-		}
+			background-color: $black-450;
+			box-shadow: 0 0 15px $black-450;
 
-		@include md {
-			width: 100%;
+			transform: translate(-110%, 0);
+			padding: 100px 20px 30px;
 		}
 
 		&.active {
@@ -105,10 +335,12 @@
 		justify-content: space-between;
 		align-items: center;
 
-		@include lg {
+		@include xl {
+			width: 100%;
 			flex-direction: column;
-			align-items: start;
-			margin: 0 0 50px;
+			align-items: flex-start;
+			padding: 50px;
+			font-size: 28px;
 		}
 
 		@include sm {
@@ -121,7 +353,7 @@
 		flex: 0 0 auto;
 
 		&:not(:last-child) {
-			margin: 0 30px 0 0;
+			margin: 0 25px 0 0;
 		}
 
 		@include lg {
@@ -131,26 +363,93 @@
 		}
 	}
 
-	&__link,
-	&__phone {
-		font-size: 16px;
+	&__link {
+	}
+}
 
-		@include lg {
-			font-size: 32px;
-		}
+.sub-menu {
+	// .sub-menu__list
+	&__list {
+		display: none;
+	}
 
-		@include sm {
-			font-size: 26px;
+	// .sub-menu__item
+	&__item {
+	}
+
+	// .sub-menu__link
+	&__link {
+	}
+}
+
+.sub-sub-menu {
+	// .sub-sub-menu__list
+	&__list {
+	}
+
+	// .sub-sub-menu__link
+	&__link {
+	}
+}
+
+.social {
+	grid-area: social;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	:not(:last-child) {
+		margin-right: 25px;
+	}
+
+	@include xl {
+		margin-left: 20px;
+	}
+
+	@include sm {
+		width: 80%;
+		margin: 0;
+		:not(:last-child) {
+			margin-right: 5px;
 		}
 	}
 
-	// .menu__phone
-	&__phone {
+	// .social__item
+	&__item {
+		:not(:last-child) {
+			margin-right: 25px;
+		}
+	}
+
+	// .social__link
+	&__link {
+		display: block;
+	}
+
+	.social__icon {
 		position: relative;
-		z-index: 1;
-		order: 2;
-		flex: 0 0 auto;
-		display: inline-block;
-		font-family: Roboto, sans-serif;
+		display: block;
+		width: 20px;
+		height: 20px;
+		fill: $white-0f;
+		outline: transparent;
+		padding-bottom: 2px;
+		border: 1px solid transparent;
+		transition: fill $hoverTime ease-in, border-color $hoverTime ease-in;
+
+		@include lg-min {
+			&:hover {
+				fill: $brandColor;
+			}
+
+			&:focus {
+				border-bottom-color: $black-800;
+			}
+		}
+
+		&:active {
+			top: 1px;
+		}
 	}
 }
