@@ -2,6 +2,10 @@
 	position: relative;
 	padding: 29px 0;
 
+	@include xl {
+		padding: 15px 0;
+	}
+
 	&::before {
 		content: "";
 		position: absolute;
@@ -15,8 +19,8 @@
 	// .header__content
 	&__content {
 		display: grid;
-		grid-template-columns: 290px auto 154px;
-		row-gap: 20px;
+		grid-template-columns: 290px auto 135px;
+		row-gap: 30px;
 		grid-template-areas:
 			"phones search lang"
 			"logo nav social";
@@ -25,12 +29,24 @@
 		@include xl {
 			grid-template-columns: auto;
 			grid-template-areas:
-				"logo  logo nav"
-				"social phones phones"
-				"search search lang";
+				"logo phones lang"
+				"search search social"
+				"nav nav nav";
 			justify-content: space-between;
 			align-items: center;
-			row-gap: 30px;
+			row-gap: 25px;
+		}
+
+		@include lg {
+		}
+
+		@include md {
+			grid-template-columns: auto;
+			grid-template-areas:
+				"logo nav"
+				"social phones"
+				"search lang";
+			justify-content: space-between;
 		}
 
 		@include sm {
@@ -47,20 +63,19 @@
 		grid-area: logo;
 		position: relative;
 		max-width: 230px;
-		min-height: 77px;
-		height: 100%;
 		width: 100%;
+		height: 100%;
 		font-weight: 300;
 		font-size: 14px;
-		padding-bottom: 8px;
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-end;
 		outline: transparent;
 		border: 1px solid transparent;
 		transition: border-color $hoverTime ease-in;
 
-		@include lg-min {
+		@include md {
+			align-self: flex-start;
+		}
+
+		@include md-min {
 			&:hover {
 				border-bottom-color: $brandColor;
 			}
@@ -76,7 +91,7 @@
 
 		@include xl {
 			z-index: 5;
-			justify-self: flex-start;
+			justify-self: center;
 			align-items: center;
 		}
 
@@ -91,11 +106,24 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 100%;
 
 	@include xl {
-		justify-self: flex-end;
+		width: 100%;
+		&:not(:last-child) {
+			margin-right: 30px;
+		}
+	}
+
+	@include md {
+		&:not(:last-child) {
+			margin-right: 0;
+		}
 		flex-direction: column;
+		align-self: flex-start;
+	}
+
+	@include sm {
+		align-items: start;
 	}
 
 	&__item {
@@ -124,7 +152,7 @@
 			@include bg-cover;
 		}
 
-		@include lg-min {
+		@include md-min {
 			&:hover {
 				color: $black-600;
 			}
@@ -168,7 +196,7 @@
 			transition: color $hoverTime ease-in;
 		}
 
-		@include lg-min {
+		@include md-min {
 			&:hover {
 				&::placeholder {
 					color: $black-450;
@@ -197,7 +225,7 @@
 		background-color: $brandColor;
 		transition: background-color $hoverTime ease-in, color $hoverTime ease-in;
 
-		@include lg-min {
+		@include md-min {
 			&:hover {
 				background-color: $black-600;
 			}
@@ -224,7 +252,7 @@
 	align-items: center;
 	justify-self: end;
 
-	@include xl {
+	@include md {
 		max-width: 100%;
 		justify-self: center;
 		justify-content: flex-end;
@@ -234,7 +262,7 @@
 	&__item {
 		margin-right: 10px;
 
-		@include xl {
+		@include md {
 			display: none;
 
 			&.active {
@@ -256,7 +284,7 @@
 		border: 1px solid transparent;
 		transition: border-color $hoverTime ease-in;
 
-		@include lg-min {
+		@include md-min {
 			&:hover {
 				border-bottom-color: $brandColor;
 			}
@@ -292,6 +320,9 @@
 
 	@include xl {
 		margin: 0;
+	}
+
+	@include md {
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
@@ -309,6 +340,9 @@
 		transition: all $hoverTime ease-out;
 
 		@include xl {
+		}
+
+		@include md {
 			position: fixed;
 			top: 0;
 			left: 0;
@@ -331,21 +365,19 @@
 	&__list {
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		justify-content: center;
 
 		@include xl {
-			flex-direction: column;
-			align-items: flex-start;
-			padding: 50px;
-			font-size: 28px;
-		}
-
-		@include lg {
-			font-size: 22px;
+			&:not(:last-child) {
+				margin-right: 20px;
+			}
 		}
 
 		@include md {
-			font-size: 17px;
+			flex-direction: column;
+			align-items: flex-start;
+			padding: 50px;
+			font-size: 22px;
 		}
 
 		@include sm {
@@ -359,10 +391,10 @@
 		position: relative;
 
 		&:not(:last-child) {
-			margin: 0 15px 0 0;
+			margin: 0 25px 0 0;
 		}
 
-		@include xl {
+		@include md {
 			&:not(:last-child) {
 				margin: 0 0 30px 0;
 			}
@@ -397,21 +429,31 @@
 		top: 10px;
 		left: 0;
 		min-width: 295px;
-		padding: 20px 0 0 0;
+		padding: 15px 0 0 0;
 		transition: all $hoverTime ease-in;
 
-		@include xl {
-			top: -100%;
-			left: 110%;
+		@include md {
+			top: 0;
+			padding: 0 0 0 30px;
+			left: 90%;
 		}
 	}
 
 	// .sub-menu__item
 	&__item {
-		padding: 10px 35px 10px 20px;
+		padding: 10px 15px 10px 20px;
 		background-color: $black-30d;
 		border-bottom: 1px solid $black-300;
 		transition: background-color $hoverTime ease-in;
+
+		@include lg {
+			max-width: 275px;
+			font-weight: 300;
+		}
+
+		@include md {
+			border-bottom-color: $brandColor;
+		}
 
 		&:hover {
 			background-color: $brandColor;
@@ -425,7 +467,6 @@
 	// .sub-menu__link
 	&__link {
 		display: inline-block;
-		font-weight: 300;
 		font-size: 11px;
 	}
 }
@@ -436,23 +477,21 @@
 		display: none;
 		position: absolute;
 		top: 0;
-		left: 100%;
-		min-width: 455px;
-		padding: 20px 0 0 2px;
-
-		@include xl {
-			position: relative;
-			left: 0;
-			top: 100%;
-		}
+		left: 93%;
+		min-width: 250px;
+		padding: 15px 0 0 2px;
 	}
 
 	// .sub-sub-menu__item
 	&__item {
-		padding: 10px 35px 10px 20px;
+		padding: 10px 15px 10px 15px;
 		background-color: $black-30d;
 		border-bottom: 1px solid $black-300;
 		transition: background-color $hoverTime ease-in;
+
+		@include lg {
+			font-weight: 300;
+		}
 
 		&:hover {
 			background-color: $brandColor;
@@ -473,26 +512,25 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
-	:not(:last-child) {
-		margin-right: 18px;
-	}
+	margin-left: 10px;
 
 	@include xl {
-		margin-left: 15px;
+		margin: 0;
+	}
+
+	@include md {
+		justify-content: center;
+		justify-self: self-start;
+		margin-right: auto;
 	}
 
 	@include sm {
 		width: 80%;
-		margin: 0;
-		:not(:last-child) {
-			margin-right: 5px;
-		}
 	}
 
 	// .social__item
 	&__item {
-		:not(:last-child) {
+		&:not(:last-child) {
 			margin-right: 25px;
 		}
 	}
@@ -505,15 +543,15 @@
 	.social__icon {
 		position: relative;
 		display: block;
-		width: 20px;
-		height: 20px;
+		width: 23px;
+		height: 23px;
 		fill: $white-0f;
 		outline: transparent;
 		padding-bottom: 2px;
 		border: 1px solid transparent;
 		transition: fill $hoverTime ease-in, border-color $hoverTime ease-in;
 
-		@include lg-min {
+		@include md-min {
 			&:hover {
 				fill: $brandColor;
 			}

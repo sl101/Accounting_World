@@ -24,8 +24,8 @@
 	}
 }
 
-@mixin lg-min {
-	@media only screen and (min-width: #{$screen-lg + px}) {
+@mixin md-min {
+	@media only screen and (min-width: #{$screen-md + px}) {
 		@content;
 	}
 }

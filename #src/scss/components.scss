@@ -6,7 +6,7 @@
 	border-bottom: 1px solid transparent;
 	transition: color $hoverTime ease-in;
 
-	@include lg-min {
+	@include md-min {
 		&:focus {
 			border-bottom-color: $brandColor;
 		}
