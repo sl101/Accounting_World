@@ -64,3 +64,12 @@
 		}
 	}
 }
+
+@keyframes delay-overflow {
+	0% {
+		overflow: hidden;
+	}
+	100% {
+		overflow: visible;
+	}
+}

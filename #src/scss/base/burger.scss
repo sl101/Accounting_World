@@ -8,13 +8,12 @@
 	@include md {
 		display: block;
 		position: relative;
-
+		z-index: 5;
 		top: -10px;
 		right: 0;
 		width: 35px;
 		height: 20px;
 		cursor: pointer;
-		z-index: 5;
 
 		span {
 			transition: all 0.3s ease 0s;
