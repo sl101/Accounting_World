@@ -38,7 +38,6 @@
 
 		@include md {
 			position: relative;
-			// z-index: 2;
 			grid-template-columns: auto;
 			grid-template-areas:
 				"logo logo nav"
@@ -446,10 +445,11 @@
 		@include md-min {
 			&:hover .sub-menu__list {
 				max-height: 682px;
-				overflow: visible;
+				// overflow: visible;
 				visibility: visible;
 				margin-bottom: 25px;
-				transition: max-height $hoverTime ease-in, visibility hoverTime ease-in;
+				// transition: max-height $hoverTime ease, visibility $hoverTime ease;
+				transition: all $doubleHoverTime ease;
 			}
 		}
 	}
@@ -474,10 +474,11 @@
 		min-width: 315px;
 		padding: 15px 0 0 0;
 		font-size: 11px;
-		display: none;
 		max-height: 0;
+		// overflow: hidden;
 		visibility: hidden;
-		transition: max-height $hoverTime ease-in, visibility hoverTime ease-in;
+		// transition: max-height $hoverTime ease, visibility $hoverTime ease;
+		transition: all $hoverTime ease;
 
 		@include md {
 			position: relative;
@@ -517,9 +518,10 @@
 
 			&:hover .sub-sub-menu__list {
 				max-height: 700px;
-				overflow: visible;
+				// overflow: visible;
 				visibility: visible;
-				transition: max-height $hoverTime ease-in;
+				// transition: max-height $hoverTime ease-in;
+				transition: all $doubleHoverTime ease-in;
 			}
 		}
 	}
@@ -544,9 +546,8 @@
 		padding: 0 0 0 2px;
 		font-size: 11px;
 		background-color: transparent;
-		display: none;
 		max-height: 0;
-		overflow: hidden;
+		// overflow: hidden;
 		visibility: hidden;
 		transition: all $hoverTime ease-in;
 
@@ -628,10 +629,18 @@ body.touch .arrow {
 	visibility: visible;
 }
 
+body.touch .sub-menu__list {
+	display: none;
+}
+
 body.touch .sub-menu__list.open {
 	display: block;
 	max-height: 700px;
 	visibility: visible;
+}
+
+body.touch .sub-sub-menu__list {
+	display: none;
 }
 
 body.touch .sub-sub-menu__list.open {
