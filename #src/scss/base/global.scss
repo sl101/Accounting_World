@@ -24,6 +24,22 @@ body {
 	color: $black-800;
 }
 
+body.lock {
+	&::after {
+		content: "";
+		position: absolute;
+		z-index: 5;
+		top: 0;
+		left: 0;
+		width: 100%;
+		min-height: 80px;
+		background-color: transparent;
+		@include md {
+			background-color: $black-450;
+		}
+	}
+}
+
 .lock {
 	position: relative;
 	overflow: hidden;
