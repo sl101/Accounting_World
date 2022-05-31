@@ -426,29 +426,27 @@
 	// .menu__item
 	&__item {
 		position: relative;
+		display: block;
+		line-height: 25px;
+		padding: 15px 0 0;
 		&:not(:last-child) {
 			margin: 0 20px 0 0;
 		}
 
 		@include md {
+			min-height: 60px;
+			line-height: 25px;
+			padding: 15px 0;
 			&:not(:last-child) {
-				margin: 0 0 30px 0;
-			}
-		}
-
-		@include sm {
-			&:not(:last-child) {
-				margin: 0 0 15px 0;
+				margin: 0;
 			}
 		}
 
 		@include md-min {
 			&:hover .sub-menu__list {
 				max-height: 682px;
-				// overflow: visible;
 				visibility: visible;
 				margin-bottom: 25px;
-				// transition: max-height $hoverTime ease, visibility $hoverTime ease;
 				transition: all $doubleHoverTime ease;
 			}
 		}
@@ -475,16 +473,19 @@
 		padding: 15px 0 0 0;
 		font-size: 11px;
 		max-height: 0;
-		// overflow: hidden;
 		visibility: hidden;
-		// transition: max-height $hoverTime ease, visibility $hoverTime ease;
 		transition: all $hoverTime ease;
 
 		@include md {
 			position: relative;
+			top: 10px;
 			padding: 0;
 			margin-bottom: 25px;
 			box-shadow: 0 0 15px $black-300;
+		}
+
+		@include sm {
+			min-width: auto;
 		}
 	}
 
@@ -505,9 +506,7 @@
 		}
 
 		@include md {
-			&:not(:last-child) {
-				border-bottom-width: 2px;
-			}
+			border-bottom-width: 2px;
 		}
 
 		@include md-min {
@@ -518,9 +517,7 @@
 
 			&:hover .sub-sub-menu__list {
 				max-height: 700px;
-				// overflow: visible;
 				visibility: visible;
-				// transition: max-height $hoverTime ease-in;
 				transition: all $doubleHoverTime ease-in;
 			}
 		}
@@ -547,7 +544,6 @@
 		font-size: 11px;
 		background-color: transparent;
 		max-height: 0;
-		// overflow: hidden;
 		visibility: hidden;
 		transition: all $hoverTime ease-in;
 
@@ -567,7 +563,7 @@
 			left: 0;
 			border-top: 2px solid $black-300;
 			box-shadow: 0 0 25px $black;
-			margin: 5px 0 10px;
+			margin: 15px 0 15px;
 		}
 	}
 
@@ -603,39 +599,82 @@
 .arrow {
 	position: absolute;
 	z-index: 9;
-	display: inline-block;
+	display: block;
 	max-height: 0;
 	visibility: hidden;
 	top: 5px;
-	right: 0;
-	width: 0;
-	height: 0;
-	border-top: 10px solid $white;
-	border-right: 10px solid transparent;
-	border-left: 10px solid transparent;
+	right: -5px;
+	width: 50px;
+	height: 50px;
+	background-color: transparent;
+	border-radius: 100%;
 	transition: all $hoverTime ease-in;
+
+	@include md {
+		top: 0;
+		right: 0;
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		z-index: 1;
+		top: 18px;
+		left: 50%;
+		width: 26px;
+		height: 26px;
+		transform: translateX(-50%);
+		border-top: 13px solid $white;
+		border-right: 13px solid transparent;
+		border-left: 13px solid transparent;
+	}
 }
 
 .parent {
-	padding-right: 25px;
+	padding-right: 40px;
 }
 
 .arrow.active {
-	transform: rotate(-180deg);
+	transform: rotateX(-180deg);
+}
+
+body.mouse .menu__item {
+	min-height: auto;
+	padding: 0;
+	@include md {
+		min-height: 60px;
+	}
+}
+
+body.touch .menu__item {
+	&:not(:last-child) {
+		margin: 0 12px 0 0;
+	}
+
+	@include md {
+		&:not(:last-child) {
+			margin: 0;
+		}
+	}
 }
 
 body.touch .arrow {
-	max-height: 20px;
+	max-height: 50px;
 	visibility: visible;
+
+	@include md {
+		right: 0;
+	}
 }
 
 body.touch .sub-menu__list {
 	display: none;
+	top: 30px;
 }
 
 body.touch .sub-menu__list.open {
 	display: block;
-	max-height: 700px;
+	max-height: 900px;
 	visibility: visible;
 }
 
@@ -653,12 +692,12 @@ body.touch .sub-sub-menu__list.open {
 
 .sub-menu__arrow.arrow {
 	position: absolute;
-	right: 10px;
-	top: 12px;
-	border-bottom: none;
-	border-left: 10px solid transparent;
-	border-top: 10px solid $white;
-	border-right: 10px solid transparent;
+	right: 0;
+	top: 0;
+}
+
+body.touch .sub-menu__arrow.arrow {
+	right: 0px;
 }
 
 .sub-menu__arrow.arrow.active {
