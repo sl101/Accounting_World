@@ -353,7 +353,6 @@
 	}
 }
 
-//.menu
 .menu {
 	grid-area: nav;
 	display: block;
@@ -444,9 +443,8 @@
 
 		@include md-min {
 			&:hover .sub-menu__list {
-				max-height: 682px;
+				max-height: 900px;
 				visibility: visible;
-				margin-bottom: 25px;
 				transition: all $doubleHoverTime ease;
 			}
 		}
@@ -469,18 +467,19 @@
 		z-index: 1;
 		top: 10px;
 		left: 0;
-		min-width: 315px;
-		padding: 15px 0 0 0;
+		min-width: 740px;
+		width: 100%;
+		padding: 15px 420px 0 0;
 		font-size: 11px;
 		max-height: 0;
+		overflow: hidden;
 		visibility: hidden;
-		transition: all $hoverTime ease;
+		transition: all $hoverTime ease-in;
 
 		@include md {
 			position: relative;
 			top: 10px;
 			padding: 0;
-			margin-bottom: 25px;
 			box-shadow: 0 0 15px $black-300;
 		}
 
@@ -518,7 +517,7 @@
 			&:hover .sub-sub-menu__list {
 				max-height: 700px;
 				visibility: visible;
-				transition: all $doubleHoverTime ease-in;
+				transition: all $hoverTime ease-in;
 			}
 		}
 	}
@@ -545,6 +544,7 @@
 		background-color: transparent;
 		max-height: 0;
 		visibility: hidden;
+		overflow: hidden;
 		transition: all $hoverTime ease-in;
 
 		@include xl {
@@ -596,6 +596,10 @@
 	}
 }
 
+.parent {
+	padding-right: 40px;
+}
+
 .arrow {
 	position: absolute;
 	z-index: 9;
@@ -630,16 +634,21 @@
 	}
 }
 
-.parent {
-	padding-right: 40px;
-}
-
 .arrow.active {
 	transform: rotateX(-180deg);
 }
 
+.sub-menu__arrow.arrow {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.sub-menu__arrow.arrow.active {
+	transform: rotate(-180deg);
+}
+
 body.mouse .menu__item {
-	min-height: auto;
 	padding: 0;
 	@include md {
 		min-height: 60px;
@@ -658,6 +667,39 @@ body.touch .menu__item {
 	}
 }
 
+body.touch .sub-menu__list {
+	display: none;
+	min-height: 0;
+	top: 30px;
+	@include md {
+		display: block;
+		min-width: 315px;
+		padding: 15px 0 0 0;
+	}
+}
+
+body.touch .sub-menu__list.open {
+	display: block;
+	max-height: 900px;
+	visibility: visible;
+	@include md {
+		margin-bottom: 25px;
+	}
+}
+
+body.touch .sub-sub-menu__list {
+	display: none;
+	@include md {
+		display: block;
+	}
+}
+
+body.touch .sub-sub-menu__list.open {
+	display: block;
+	max-height: 682px;
+	visibility: visible;
+}
+
 body.touch .arrow {
 	max-height: 50px;
 	visibility: visible;
@@ -667,39 +709,6 @@ body.touch .arrow {
 	}
 }
 
-body.touch .sub-menu__list {
-	display: none;
-	top: 30px;
-}
-
-body.touch .sub-menu__list.open {
-	display: block;
-	max-height: 900px;
-	visibility: visible;
-}
-
-body.touch .sub-sub-menu__list {
-	display: none;
-}
-
-body.touch .sub-sub-menu__list.open {
-	display: block;
-	max-height: 682px;
-	overflow: visible;
-	visibility: visible;
-	transition: max-height $hoverTime ease-in, visibility hoverTime ease-in;
-}
-
-.sub-menu__arrow.arrow {
-	position: absolute;
-	right: 0;
-	top: 0;
-}
-
 body.touch .sub-menu__arrow.arrow {
 	right: 0px;
-}
-
-.sub-menu__arrow.arrow.active {
-	transform: rotate(-180deg);
 }
