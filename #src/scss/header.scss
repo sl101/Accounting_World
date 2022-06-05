@@ -21,19 +21,28 @@
 		display: grid;
 		row-gap: 30px;
 		grid-template-areas:
-			"phones search lang"
-			"logo nav social";
+			"logo search social"
+			"phones nav lang";
+		grid-template-columns: auto;
 		align-items: center;
 
 		@include xl {
-			grid-template-columns: auto;
 			grid-template-areas:
-				"logo phones lang"
-				"search search social"
-				"nav nav nav";
+				"logo social social"
+				"search search phones"
+				"nav nav lang";
 			justify-content: space-between;
 			align-items: center;
 			row-gap: 25px;
+		}
+
+		@include lg {
+			grid-template-columns: auto auto auto 136px;
+			grid-template-areas:
+				"logo  logo social lang "
+				"search search phones phones"
+				"nav nav nav nav";
+			justify-content: stretch;
 		}
 
 		@include md {
@@ -82,7 +91,6 @@
 
 	@include xl {
 		z-index: 7;
-		justify-self: center;
 		align-items: center;
 	}
 
@@ -104,14 +112,11 @@
 .phones {
 	grid-area: phones;
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
-	align-items: center;
 
 	@include xl {
-		width: 100%;
-		&:not(:last-child) {
-			margin-right: 30px;
-		}
+		justify-self: end;
 	}
 
 	@include md {
@@ -183,6 +188,8 @@
 		background-color: $white-0f;
 		outline: none;
 		border: 1px solid transparent;
+		border-top-left-radius: 3px;
+		border-bottom-left-radius: 3px;
 		transition: border-color $hoverTime ease-in, box-shadow $hoverTime ease-in;
 
 		&::placeholder {
@@ -212,12 +219,13 @@
 		display: block;
 		max-width: 45px;
 		min-height: 37px;
-		border-radius: 3px;
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
 		padding: 0 12px;
 		font-weight: 700;
 		color: $white-0f;
 		outline: none;
-		box-shadow: inset 0 1px 2px $black-800;
+		box-shadow: inset -1px 1px 2px $black-800;
 		background-color: $brandColor;
 		transition: background-color $hoverTime ease-in, color $hoverTime ease-in;
 
@@ -242,12 +250,14 @@
 	position: relative;
 	z-index: 7;
 	max-width: 60px;
+	min-height: 60px;
 	width: 100%;
 	height: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	justify-self: end;
+	padding: 0 0 8px 0;
 
 	@include md {
 		z-index: 3;
@@ -293,6 +303,7 @@
 
 .social {
 	grid-area: social;
+	flex: 0 0 152px;
 	max-width: 152px;
 	width: 100%;
 	display: flex;
@@ -357,13 +368,7 @@
 	grid-area: nav;
 	display: block;
 	width: 100%;
-	flex: 0 0 100%;
-	margin-left: -20px;
 	text-transform: uppercase;
-
-	@include xl {
-		margin: 0;
-	}
 
 	@include md {
 		display: flex;
@@ -410,6 +415,14 @@
 		display: flex;
 		justify-content: space-between;
 		justify-content: center;
+
+		@include xl {
+			justify-content: start;
+		}
+
+		@include lg {
+			justify-content: center;
+		}
 
 		@include md {
 			display: block;
