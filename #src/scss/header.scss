@@ -219,23 +219,25 @@
 		display: block;
 		max-width: 45px;
 		min-height: 37px;
+		border: 1px solid $brandColor;
 		border-top-right-radius: 3px;
 		border-bottom-right-radius: 3px;
 		padding: 0 12px;
 		font-weight: 700;
 		color: $white-0f;
 		outline: none;
-		box-shadow: inset -1px 1px 2px $black-800;
 		background-color: $brandColor;
-		transition: background-color $hoverTime ease-in, color $hoverTime ease-in;
+		transition: background-color $hoverTime ease-in, color $hoverTime ease-in, border-color $hoverTime ease-in;
 
 		@include md-min {
-			&:hover {
-				background-color: $black-600;
-			}
-
 			&:focus {
 				color: $black-450;
+			}
+
+			&:hover {
+				border-color: $black-600;
+				background-color: $black-600;
+				color: $white-0f;
 			}
 		}
 
