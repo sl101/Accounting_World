@@ -21,19 +21,13 @@
 		display: grid;
 		row-gap: 30px;
 		grid-template-areas:
-			"logo search social"
-			"phones nav lang";
+			"logo search social lang"
+			"phones nav nav nav";
 		grid-template-columns: auto;
 		align-items: center;
 
 		@include xl {
-			grid-template-areas:
-				"logo social social"
-				"search search phones"
-				"nav nav lang";
-			justify-content: space-between;
-			align-items: center;
-			row-gap: 25px;
+			row-gap: 20px;
 		}
 
 		@include lg {
@@ -115,7 +109,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 
-	@include xl {
+	@include lg {
 		justify-self: end;
 	}
 
@@ -174,6 +168,10 @@
 	margin: 0 auto;
 
 	@include xl {
+		margin: 0 0 0 15px;
+	}
+
+	@include lg {
 		margin: 0;
 	}
 
@@ -421,10 +419,7 @@
 		display: flex;
 		justify-content: space-between;
 		justify-content: center;
-
-		@include xl {
-			justify-content: start;
-		}
+		justify-content: flex-end;
 
 		@include lg {
 			justify-content: center;
@@ -447,6 +442,7 @@
 		display: block;
 		line-height: 25px;
 		padding: 15px 0 0;
+
 		&:not(:last-child) {
 			margin: 0 20px 0 0;
 		}
@@ -633,6 +629,8 @@
 	transition: all $hoverTime ease-in;
 
 	@include md {
+		width: 50px;
+		height: 50px;
 		top: 0;
 		right: 0;
 	}
@@ -643,12 +641,15 @@
 		z-index: 1;
 		top: 18px;
 		left: 50%;
-		width: 26px;
-		height: 26px;
 		transform: translateX(-50%);
-		border-top: 13px solid $white;
-		border-right: 13px solid transparent;
-		border-left: 13px solid transparent;
+
+		@include md {
+			width: 26px;
+			height: 26px;
+			border-top: 13px solid $white;
+			border-right: 13px solid transparent;
+			border-left: 13px solid transparent;
+		}
 	}
 }
 
@@ -675,7 +676,7 @@ body.mouse .menu__item {
 
 body.touch .menu__item {
 	&:not(:last-child) {
-		margin: 0 12px 0 0;
+		margin: 0 10px 0 0;
 	}
 
 	@include md {
@@ -721,12 +722,40 @@ body.touch .sub-sub-menu__list.open {
 	}
 }
 
+body.touch .parent {
+	padding-right: 22px;
+
+	@include md {
+		padding-right: 40px;
+	}
+}
+
 body.touch .arrow {
 	max-height: 50px;
 	visibility: visible;
+	width: 30px;
+	height: 30px;
+
+	&::after {
+		width: 18px;
+		height: 18px;
+		border-top: 9px solid $white;
+		border-right: 9px solid transparent;
+		border-left: 9px solid transparent;
+	}
 
 	@include md {
+		width: 50px;
+		height: 50px;
 		right: 0;
+
+		&::after {
+			width: 26px;
+			height: 26px;
+			border-top: 13px solid $white;
+			border-right: 13px solid transparent;
+			border-left: 13px solid transparent;
+		}
 	}
 }
 
